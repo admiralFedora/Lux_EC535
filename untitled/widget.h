@@ -20,6 +20,7 @@ public:
     ~Widget();
 
 private:
+    QVBoxLayout *overAll;
     QHBoxLayout *boxBox;
     Adjusters *iso;
     Adjusters *shutter;

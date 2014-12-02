@@ -8,15 +8,18 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    iso = new Adjusters("iso",100,3200);
-    shutter = new Adjusters("shutter",1000,1);
-    aperture = new Adjusters("aperture",1,20);
-    exposure = new Adjusters("exposure",-3,3);
-    boxBox = new QHBoxLayout(this);
+    iso = new Adjusters("iso");
+    shutter = new Adjusters("shutter");
+    aperture = new Adjusters("aperture");
+    exposure = new Adjusters("exposure");
+    overAll = new QVBoxLayout(this);
+    boxBox = new QHBoxLayout();
     boxBox->addLayout(iso);
     boxBox->addLayout(shutter);
     boxBox->addLayout(aperture);
     boxBox->addLayout(exposure);
+    overAll->addLayout(boxBox);
+    overAll->setSpacing(10);
     this->setStyleSheet("background-color: white;");
 }
 

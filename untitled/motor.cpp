@@ -47,8 +47,16 @@ bool motor::moveMotor(char dir, int step)
     // EX: 'f10' - foward 10 steps
     // EX: 'b50' - backwards 50 steps
     char command[4];
-    command[0] = dir;
-    itoa(step,command+1,10);
+
+    if(dir == 'b' && steps-step < 0) // prevent the motor from going beyond off pos
+    {
+        step = steps;
+    }
+    else if(dir == 'f' && steps+step >= maxStep) // prevent the motor from going beyond the max pos
+    {
+        step = maxStep - steps;
+    }
+    sprintf(command,"%c%d",dir,step);
     if(fwrite(command,4,1,dev) != 4)
     {
         return false;
