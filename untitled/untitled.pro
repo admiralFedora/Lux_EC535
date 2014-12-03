@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     adjusters.cpp \
     motor.cpp \
     bluetooth.cpp \
-    controls.cpp
+    controls.cpp \
+    light.cpp
 
 HEADERS  += widget.h \
     adjusters.h \
     motor.h \
     bluetooth.h \
-    controls.h
+    controls.h \
+    light.h
 
 FORMS    += widget.ui
 

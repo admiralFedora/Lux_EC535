@@ -13,6 +13,8 @@ class Adjusters : public QVBoxLayout
     Q_OBJECT
 
 public:
+    double current;
+    QString whoami;
     Adjusters(QString text);
     ~Adjusters();
 
@@ -20,9 +22,9 @@ private:
     QPushButton *top;
     QPushButton *bottom;
     QLabel *text;
-    double current;
     std::list<double> values;
     std::list<double>::iterator pos;
+
 
     void initValues(QString text);
 private slots:

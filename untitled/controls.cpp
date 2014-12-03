@@ -12,7 +12,7 @@ int controls::calculate(double iso, double aperture, double shutter, double expo
     int luxRequired;
     int diff;
     int ret;
-    luxRequired = (calib)*pow(aperture,2)/(shutter*iso);
+    luxRequired = ((calib)*pow(aperture,2)/(shutter*iso)) + pow(2,exposure);
     diff = luxRequired - Lux;
 
     if(diff < 0)

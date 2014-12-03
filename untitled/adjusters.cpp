@@ -10,6 +10,7 @@ Adjusters::Adjusters(QString text):QVBoxLayout()
     this->bottom = new QPushButton(QIcon(QPixmap(":/Images/down.png")),"",0);
     this->text = new QLabel(text);
     this->initValues(text);
+    this->whoami = text;
 
     // adding widgets
     this->addWidget(top);
@@ -26,6 +27,7 @@ Adjusters::Adjusters(QString text):QVBoxLayout()
     this->setAlignment(bottom,Qt::AlignHCenter);
     this->setAlignment(top,Qt::AlignHCenter);
     this->setAlignment(this->text,Qt::AlignHCenter);
+
 
     // connecting our signal handlers
     connect(this->top,SIGNAL(released()),this,SLOT(handleUp()));
