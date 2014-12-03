@@ -15,11 +15,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         widget.cpp \
     adjusters.cpp \
-    motor.cpp
+    motor.cpp \
+    bluetooth.cpp \
+    controls.cpp
 
 HEADERS  += widget.h \
     adjusters.h \
-    motor.h
+    motor.h \
+    bluetooth.h \
+    controls.h
 
 FORMS    += widget.ui
 

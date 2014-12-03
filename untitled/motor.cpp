@@ -41,12 +41,28 @@ motor::~motor()
     fclose(this->save);
 }
 
-bool motor::moveMotor(char dir, int step)
+
+// error codes
+// -1 can't move motor past pos 0
+// 0 a-okay
+// 1 can't move motor past max pos
+// 2 write error
+int motor::moveMotor(char dir, int step)
 {
     // commanding the motor
     // EX: 'f10' - foward 10 steps
     // EX: 'b50' - backwards 50 steps
     char command[4];
+
+    if(dir == 'b' && steps == 0)
+    {
+        return -1;
+    }
+    else if(dir == 'f' && steps == maxStep)
+    {
+        return 1;
+    }
+
 
     if(dir == 'b' && steps-step < 0) // prevent the motor from going beyond off pos
     {
@@ -59,7 +75,7 @@ bool motor::moveMotor(char dir, int step)
     sprintf(command,"%c%d",dir,step);
     if(fwrite(command,4,1,dev) != 4)
     {
-        return false;
+        return 2;
     }
-    return true;
+    return 0;
 }

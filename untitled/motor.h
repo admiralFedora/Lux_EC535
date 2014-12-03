@@ -7,7 +7,7 @@ class motor
 {
 public:
     motor(int max, const char* device);
-    bool moveMotor(char dir,int step);
+    int moveMotor(char dir,int step);
     int getSteps();
     ~motor();
 private:
