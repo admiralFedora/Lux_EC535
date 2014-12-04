@@ -86,11 +86,6 @@ void Adjusters::initValues(QString text)
 // added by Ted
 void Adjusters::setTimer()
 {
-   int pFile = open("/dev/fasync_timer",O_RDWR);
-   if (pFile < 0) {
-        fprintf (stderr, "fasync_example module isn't loaded\n");
-        return;
-	}
 	write(pFile, "Nothing", 8);
 }
 // stop adding
@@ -104,6 +99,7 @@ void Adjusters::handleUp()
         this->text->setText(QString(temp));
     }
     current = *pos;
+    this.setTimer(); // added by Ted
 }
 
 void Adjusters::handleDown()
@@ -115,4 +111,5 @@ void Adjusters::handleDown()
         this->text->setText(QString(temp));
     }
     current = *pos;
+    this.setTimer(); // added by Ted
 }
