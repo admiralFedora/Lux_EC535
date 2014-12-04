@@ -27,7 +27,7 @@ private:
 
 
     void initValues(QString text);
-    void setTimer();
+    void setTimer(); // added by Ted
 private slots:
     void handleUp();
     void handleDown();
