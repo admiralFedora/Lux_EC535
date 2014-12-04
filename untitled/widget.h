@@ -7,6 +7,12 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <controls.h>  // added by Ted
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 namespace Ui {
 class Widget;
@@ -30,6 +36,11 @@ private:
     Adjusters *exposure;
     Ui::Widget *ui;
     controls *motor_control; // added by Ted
+    int pFile,oflags;
+    struct sigaction action, oa;
+    
+public slot:
+    void setTimer();
 };
 
 #endif // WIDGET_H
