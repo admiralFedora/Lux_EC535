@@ -1,9 +1,9 @@
 CC=arm-linux-gcc
-light: light2.o luxcalc.o
-	$(CC) light2.o luxcalc.o -s -o light2
-light.o: light2.c
-	$(CC) -c light2.c
+light: light3.o luxcalc.o
+	$(CC) light3.o luxcalc.o -s -o light3
+light.o: light3.c
+	$(CC) -c light3.c
 luxcalc.o: luxcalc.c
 	$(CC) -c luxcalc.c -o luxcalc.o
 clean:
-	rm -rf *.o light2
+	rm -rf *.o light3
