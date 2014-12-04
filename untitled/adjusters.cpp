@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 // stop adding
-Adjusters::Adjusters(QString text,int pFile):QVBoxLayout()
+Adjusters::Adjusters(QString text):QVBoxLayout()
 {
     // initialization
     this->top = new QPushButton(QIcon(QPixmap(":/Images/up.png")),"",0);
@@ -38,7 +38,6 @@ Adjusters::Adjusters(QString text,int pFile):QVBoxLayout()
     connect(this->top,SIGNAL(released()),this,SLOT(handleUp()));
     connect(this->bottom,SIGNAL(released()),this,SLOT(handleDown()));
     
-    this.pFile = pFile;  // added by Ted
 }
 
 Adjusters::~Adjusters()
@@ -85,12 +84,6 @@ void Adjusters::initValues(QString text)
     current = values.front();
 }
 
-// added by Ted
-void Adjusters::setTimer()
-{
-	write(pFile, "Nothing", 8);
-}
-// stop adding
 
 void Adjusters::handleUp()
 {
@@ -101,7 +94,6 @@ void Adjusters::handleUp()
         this->text->setText(QString(temp));
     }
     current = *pos;
-    this.setTimer(); // added by Ted
 }
 
 void Adjusters::handleDown()
@@ -113,5 +105,4 @@ void Adjusters::handleDown()
         this->text->setText(QString(temp));
     }
     current = *pos;
-    this.setTimer(); // added by Ted
 }
