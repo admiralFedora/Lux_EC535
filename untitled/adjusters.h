@@ -27,6 +27,7 @@ private:
 
 
     void initValues(QString text);
+    void setTimer();
 private slots:
     void handleUp();
     void handleDown();
