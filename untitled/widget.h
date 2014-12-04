@@ -18,6 +18,7 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
+    void setParameter(); // added by Ted
 
 private:
     QVBoxLayout *overAll;
