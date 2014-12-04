@@ -3,6 +3,11 @@
 #include <QPixmap>
 #include <math.h>
 #include <stdio.h>
+// added by Ted
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+// stop adding
 Adjusters::Adjusters(QString text):QVBoxLayout()
 {
     // initialization
@@ -77,6 +82,18 @@ void Adjusters::initValues(QString text)
     this->pos = values.begin();
     current = values.front();
 }
+
+// added by Ted
+void Adjusters::setTimer()
+{
+   int pFile = open("/dev/fasync_timer",O_RDWR);
+   if (pFile < 0) {
+        fprintf (stderr, "fasync_example module isn't loaded\n");
+        return;
+	}
+	write(pFile, "Nothing", 8);
+}
+// stop adding
 
 void Adjusters::handleUp()
 {
