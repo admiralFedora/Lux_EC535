@@ -22,6 +22,7 @@ private:
     QPushButton *top;
     QPushButton *bottom;
     QLabel *text;
+    int pFile; // added by Ted
     std::list<double> values;
     std::list<double>::iterator pos;
 
