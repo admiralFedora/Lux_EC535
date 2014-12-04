@@ -22,12 +22,10 @@ public:
 private:
     QPushButton *top;
     QPushButton *bottom;
-    int pFile; // added by Ted
     std::list<double> values;
     std::list<double>::iterator pos;
 
     void initValues(QString text);
-    void setTimer(); // added by Ted
 private slots:
     void handleUp();
     void handleDown();
