@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <controls.h>  // added by Ted
 
 namespace Ui {
 class Widget;
@@ -28,6 +29,7 @@ private:
     Adjusters *aperture;
     Adjusters *exposure;
     Ui::Widget *ui;
+    controls *motor_control; // added by Ted
 };
 
 #endif // WIDGET_H
