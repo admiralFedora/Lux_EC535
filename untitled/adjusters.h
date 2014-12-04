@@ -15,7 +15,7 @@ class Adjusters : public QVBoxLayout
 public:
     double current;
     QString whoami;
-    Adjusters(QString text);
+    Adjusters(QString text, int pFile); // changed by Ted
     ~Adjusters();
 
 private:
