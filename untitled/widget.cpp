@@ -3,15 +3,32 @@
 #include <QIcon>
 #include <QPixmap>
 #include "adjusters.h"
+// added by Ted
+#include <cstdio>
+#include <unistd.h>
+#include <cstdlib>
+#include <signal.h>
+#include <fcntl.h>
+#include <string.h>
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
+    //added by Ted
+    int pFile,oflags;
+	struct sigaction action, oa;
+	pFile = open("/dev/fasync_example", O_RDWR);
+	if (pFile < 0) {
+		fprintf (stderr, "fasync_example module isn't loaded\n");
+	}
+	// stop adding
+	
     ui->setupUi(this);
-    iso = new Adjusters("iso");
-    shutter = new Adjusters("shutter");
-    aperture = new Adjusters("aperture");
-    exposure = new Adjusters("exposure");
+    iso = new Adjusters("iso",pFile);           // changed by Ted
+    shutter = new Adjusters("shutter",pFile);   // changed by Ted
+    aperture = new Adjusters("aperture",pFile); // changed by Ted
+    exposure = new Adjusters("exposure",pFile); // changed by Ted
     overAll = new QVBoxLayout(this);
     boxBox = new QHBoxLayout();
     boxBox->addLayout(iso);
@@ -21,9 +38,40 @@ Widget::Widget(QWidget *parent) :
     overAll->addLayout(boxBox);
     overAll->setSpacing(10);
     this->setStyleSheet("background-color: white;");
+    
+    
+    // Setup signal handler
+	memset(&action, 0, sizeof(action));
+	action.sa_handler = setParameter;
+	action.sa_flags = SA_SIGINFO;
+	sigemptyset(&action.sa_mask);
+	sigaction(SIGIO, &action, NULL);
+	fcntl(pFile, F_SETOWN, getpid());
+	oflags = fcntl(pFile, F_GETFL);
+	fcntl(pFile, F_SETFL, oflags | FASYNC);
+	// stop adding
 }
 
 Widget::~Widget()
 {
     delete ui;
+}
+
+// added by Ted
+void Widget::setParameter(int signo)
+{
+    // read lux reading from /proc/fortune
+    FILE * pFile = fopen("/proc/fortune", "r");
+    char content[10] = {0};
+    int lux;
+    fread(line,10,1,pFile);
+    sscanf(line,"%d",&lux);
+    fclose(pFile);
+    // motor control
+    motor_control->calculate(iso->current, 
+                            aperture->current,
+                            shutter->current,
+                            exposure->current,
+                            lux);
+    
 }
