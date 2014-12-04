@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 // stop adding
-Adjusters::Adjusters(QString text):QVBoxLayout()
+Adjusters::Adjusters(QString text,int pFile):QVBoxLayout()
 {
     // initialization
     this->top = new QPushButton(QIcon(QPixmap(":/Images/up.png")),"",0);
@@ -37,6 +37,8 @@ Adjusters::Adjusters(QString text):QVBoxLayout()
     // connecting our signal handlers
     connect(this->top,SIGNAL(released()),this,SLOT(handleUp()));
     connect(this->bottom,SIGNAL(released()),this,SLOT(handleDown()));
+    
+    this.pFile = pFile;  // added by Ted
 }
 
 Adjusters::~Adjusters()
