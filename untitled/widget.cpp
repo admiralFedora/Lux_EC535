@@ -16,11 +16,9 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     //added by Ted
-    int pFile,oflags;
-	struct sigaction action, oa;
-	pFile = open("/dev/fasync_example", O_RDWR);
+	pFile = open("/dev/fasync_timer", O_RDWR);
 	if (pFile < 0) {
-		fprintf (stderr, "fasync_example module isn't loaded\n");
+		fprintf (stderr, "fasync_timer module isn't loaded\n");
 	}
 	// stop adding
 	
@@ -49,6 +47,16 @@ Widget::Widget(QWidget *parent) :
 	fcntl(pFile, F_SETOWN, getpid());
 	oflags = fcntl(pFile, F_GETFL);
 	fcntl(pFile, F_SETFL, oflags | FASYNC);
+	
+	// connect signal and slot
+	connect(this->iso->top,SIGNAL(released()),this,SLOT(setTimer()));
+	connect(this->iso->bottom,SIGNAL(released()),this,SLOT(setTimer()));
+	connect(this->aperture->top,SIGNAL(released()),this,SLOT(setTimer()));
+	connect(this->aperture->bottom,SIGNAL(released()),this,SLOT(setTimer()));
+	connect(this->shutter->top,SIGNAL(released()),this,SLOT(setTimer()));
+	connect(this->shutter->bottom,SIGNAL(released()),this,SLOT(setTimer()));
+	connect(this->exposure->top,SIGNAL(released()),this,SLOT(setTimer()));
+	connect(this->exposure->bottom,SIGNAL(released()),this,SLOT(setTimer()));
 	// stop adding
 }
 
@@ -74,4 +82,8 @@ void Widget::setParameter(int signo)
                             exposure->current,
                             lux);
     
+}
+
+void Widget::setTimer(){
+	write(pFile,"nothing",8);
 }
