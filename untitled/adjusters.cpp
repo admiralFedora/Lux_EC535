@@ -3,11 +3,7 @@
 #include <QPixmap>
 #include <math.h>
 #include <stdio.h>
-// added by Ted
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-// stop adding
+
 Adjusters::Adjusters(QString text):QVBoxLayout()
 {
     // initialization
