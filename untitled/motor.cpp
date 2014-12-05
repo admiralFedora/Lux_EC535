@@ -19,7 +19,7 @@ motor::motor(int max, const char* device)
         strcpy(buffW+1,buffR);
         fwrite(buffW,5,1,dev);
     }
-    fclose(this->save);
+    //fclose(this->save);
     this->maxStep = max;
 }
 
