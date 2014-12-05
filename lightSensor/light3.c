@@ -92,7 +92,7 @@ int main()
 		sprintf(str,"%d",Lux);
 		fwrite(str,1,sizeof(str),pFile);
 		fclose(pFile);
-		printf("value %d\n",Lux);
+		//printf("value %d\n",Lux);
 			
 	}
 }
