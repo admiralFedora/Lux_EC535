@@ -1,5 +1,5 @@
 ifneq ($(KERNELRELEASE),)
-	obj-m := pot.o fasync_timer.o
+	obj-m := pot.o
 else
 	KERNELDIR := $(EC535)/gumstix/oe/linux-2.6.21/
 	PWD := $(shell pwd)
