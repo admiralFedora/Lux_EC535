@@ -26,6 +26,8 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
     void setParameter(); // added by Ted
+	static void * staticEntryPoint(void *c);
+
 
 private:
     QVBoxLayout *overAll;
@@ -36,10 +38,11 @@ private:
     Adjusters *exposure;
     Ui::Widget *ui;
     controls *motor_control; // added by Ted
-    int pFile,oflags;
-    struct sigaction action, oa;
+	bool thread_alive;
+	pthread_t thread;
+	
     
-public slot:
+public slots:
     void setTimer();
 };
 
